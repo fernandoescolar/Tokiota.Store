@@ -1,0 +1,44 @@
+﻿@using Tokiota.Store.Helpers
+@using Tokiota.Store.Models
+@model IEnumerable<Tokiota.Store.Models.Account.UserListItemModel>
+
+@{
+    ViewBag.Title = "User List";
+}
+
+<h2>UserList</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Roles)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Roles)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id })
+         
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.Pager(Model as IPaginatedListModel)

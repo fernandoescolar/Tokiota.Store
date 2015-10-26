@@ -1,0 +1,4 @@
+﻿@model Tokiota.Store.Models.Cart.CartInfoModel
+<p class="text-right" style="padding-top:20px;">
+    @Html.ActionLink("Saved items", "List", "Cart") | Your Bag: @Model.TotalPrice.ToString("C") (@Model.Count)
+</p>

@@ -1,0 +1,37 @@
+﻿@model Tokiota.Store.Models.Product.ProductModel
+
+@{
+}
+
+<div class="row">
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
+    <hr />
+    <div class="col-md-3">
+        <div class="row detail">
+            <img src="@Url.Content(Model.Image)" alt="@Html.Raw(Model.Name)">
+        </div>
+        <div class="row">
+            <p class="lead">@Html.DisplayFor(model => model.Price) €</p>
+        </div>
+        <div class="row">
+            @using (Ajax.BeginForm("Add", "Cart", new AjaxOptions { UpdateTargetId = "shopping-cart", InsertionMode = InsertionMode.Replace }))
+            {
+                @Html.Hidden("ProductId", Model.Id)
+                <div class="col-md-6">
+                    <a onclick="$(this).closest('form').submit()" class="btn btn-success btn-block" href="#">Add to cart</a>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            @Html.Raw(Model.Description)
+        </div>
+        <div class="row">
+            @Html.DisplayFor(model => model.Category)
+        </div>
+    </div>
+</div>
+<div class="row offset-top-20">
+    @Html.ActionLink("Back to List", "Index", "Home", null, null)
+</div>

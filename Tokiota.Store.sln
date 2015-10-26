@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tokiota.Store", "Tokiota.Store\Tokiota.Store.csproj", "{6FEB254D-42C8-47F7-ABBA-6288BD0BB06F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tokiota.Store.Domain", "Tokiota.Store.Domain\Tokiota.Store.Domain.csproj", "{0AF9334E-D1D6-4B76-9803-F9DDCFB2DB60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tokiota.Store.Domain.Identity", "Tokiota.Store.Domain.Identity\Tokiota.Store.Domain.Identity.csproj", "{AF89379E-9499-4282-BEA8-CFCF9A2D9814}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tokiota.Store.Domain.Catalog", "Tokiota.Store.Domain.Catalog\Tokiota.Store.Domain.Catalog.csproj", "{6E080BF5-6053-4509-8ABE-F1D06CC1FC82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tokiota.Store.Resources", "Tokiota.Store.Resources\Tokiota.Store.Resources.csproj", "{B240332A-EAD3-4410-92D7-18560D92977D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FEB254D-42C8-47F7-ABBA-6288BD0BB06F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FEB254D-42C8-47F7-ABBA-6288BD0BB06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FEB254D-42C8-47F7-ABBA-6288BD0BB06F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FEB254D-42C8-47F7-ABBA-6288BD0BB06F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF9334E-D1D6-4B76-9803-F9DDCFB2DB60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF9334E-D1D6-4B76-9803-F9DDCFB2DB60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF9334E-D1D6-4B76-9803-F9DDCFB2DB60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF9334E-D1D6-4B76-9803-F9DDCFB2DB60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF89379E-9499-4282-BEA8-CFCF9A2D9814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF89379E-9499-4282-BEA8-CFCF9A2D9814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF89379E-9499-4282-BEA8-CFCF9A2D9814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF89379E-9499-4282-BEA8-CFCF9A2D9814}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E080BF5-6053-4509-8ABE-F1D06CC1FC82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E080BF5-6053-4509-8ABE-F1D06CC1FC82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E080BF5-6053-4509-8ABE-F1D06CC1FC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E080BF5-6053-4509-8ABE-F1D06CC1FC82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B240332A-EAD3-4410-92D7-18560D92977D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B240332A-EAD3-4410-92D7-18560D92977D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B240332A-EAD3-4410-92D7-18560D92977D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B240332A-EAD3-4410-92D7-18560D92977D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

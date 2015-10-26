@@ -1,0 +1,83 @@
+﻿@using Tokiota.Store.Domain.Catalog.Model
+@using Tokiota.Store.Helpers
+@using Tokiota.Store.Models
+@using Tokiota.Store.Models.Product
+@model IEnumerable<ProductModel>
+@{
+    ViewBag.Title = "Home Page";
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="well">
+            <ul id="cat-navi" class="nav nav-list">
+                <li class="nav-header">Shop by Product</li>
+                @foreach (var category in Enum.GetNames(typeof (Category)))
+                {
+                    <li>@Html.ActionLink(category, "Search", "Home", new {category = category}, null)</li>
+                }
+            </ul>
+        </div>
+        <div class="well">
+            <p class="lead">
+                Tokiota <a href="http://www.tokiota.com/">www.tokiota.com</a>
+            </p>
+        </div>
+    </div>
+    <div class="col-md-9">
+        @if (!string.IsNullOrEmpty(ViewBag.Searched) || !string.IsNullOrEmpty(ViewBag.Category))
+        {
+            <div class="alert alert-warning">
+                @if (!string.IsNullOrEmpty(ViewBag.Searched))
+                {
+                    <p class="lead">
+                        Searched: @ViewBag.Searched
+                    </p>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.Category))
+                {
+                    <p class="lead">
+                        Category: @ViewBag.Category
+                    </p>
+                }
+            </div>
+        }
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-sm-6">
+                    <div class="thumbnail">
+                        <a href="@Url.Action("Details", "Product", new { id = item.Id })">
+                            <img src="@Url.Content(item.Image)" alt="@Html.Raw(item.Name)">
+                        </a>
+                        <div class="caption">
+                            <h3 class="">@Html.Raw(item.Name)</h3>
+                            <p class=""></p>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="lead">@Html.Raw(item.Price.ToString("C"))</p>
+                                </div>
+                                @using (Ajax.BeginForm("Add", "Cart", new AjaxOptions { UpdateTargetId = "shopping-cart", InsertionMode = InsertionMode.Replace }))
+                                {
+                                    @Html.Hidden("ProductId", item.Id)
+                                    <div class="col-md-6">
+                                        <a onclick="$(this).closest('form').submit()" class="btn btn-success btn-block" href="#">Add to cart</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <hr>
+        @{
+            var paginated = (IPaginatedListModel)Model;
+        }
+        <div class="pagination pull-right">
+            @Html.Pager(paginated)
+        </div>
+    </div>
+</div>

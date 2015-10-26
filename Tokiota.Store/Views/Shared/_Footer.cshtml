@@ -1,0 +1,40 @@
+﻿@using Tokiota.Store.Domain.Identity.Model
+<footer class="row">
+    <div class="col-md-3">
+        <h4 class="line3 center standart-h4title"><span>Navigation</span></h4>
+        <ul class="footer-links">
+            <li>@Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: null)</li>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: null)</li>
+            }
+            @if (User.IsInRole(TokiotaStoreRoles.User))
+            {
+                <li>@Html.ActionLink("My Profile", "Manage", "Account", routeValues: null, htmlAttributes: null)</li>
+            }
+            @if (User.IsInRole(TokiotaStoreRoles.Admin))
+            {
+                <li>@Html.ActionLink("User List", "UserList", "Account", routeValues: null, htmlAttributes: null)</li>
+                <li>@Html.ActionLink("New Product", "Create", "Product", routeValues: null, htmlAttributes: null)</li>
+                <li>@Html.ActionLink("Products", "List", "Product", routeValues: null, htmlAttributes: null)</li>
+            }
+            <li><a href="http://www.bootstraptor.com">Contact</a></li>
+        </ul>
+    </div>
+    @Html.Action("MostViewed", "Home", null)
+    @Html.Action("MostBuyed", "Home", null)
+    <div class="col-md-3">
+        <h4 class="line3 center standart-h4title"><span>Our office</span></h4>
+        <address>
+            <strong>Tokiota</strong><br>
+            <i class="fa-icon-map-marker"></i> Tresols, 49 - 1<br>
+            08850 Gavà, Barcelona<br>
+            <i class="fa-icon-phone-sign"></i> + 34 (123) 083 488
+
+        </address>
+    </div>
+    <div class="col-md-12">
+        <hr>
+        <p>© bootstraptor.com Company 2013</p>
+    </div>
+</footer>

@@ -1,0 +1,42 @@
+﻿@using Tokiota.Store.Helpers
+<!DOCTYPE html>
+<html lang="@CultureHelper.GetCurrentNeutralCulture()">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a tokitota's web store demo project'"/>
+    <title>@ViewBag.Title - Tokiota</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+    <body>
+        @Html.Partial("_Menu")
+        @Html.Partial("_Header")
+        <div class="container">
+            @RenderBody()
+            @Html.Partial("_Footer")
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        <script type="text/javascript">
+            $('.html-editor').wysiwyg({
+                hotKeys: {
+                    'ctrl+b meta+b': 'bold',
+                    'ctrl+i meta+i': 'italic',
+                    'ctrl+u meta+u': 'underline',
+                    'ctrl+z meta+z': 'undo',
+                    'ctrl+y meta+y meta+shift+z': 'redo'
+                }
+            });
+            setInterval(function () {
+                $('.html-editor').each(function (index, editor) {
+                    var id = $(editor).attr('data-hidden');
+                    $('#' + id).val($(editor).html());
+                });
+            }, 100);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+﻿<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h1><a class="brand" href="@Url.Content("~/")"><img src="@Url.Content("~/images/tokiota-mini.png")"/></a></h1>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-8 text-center">
+                        <div style="padding-top:20px;">
+                            @using (Html.BeginForm("Search", "Home", new { category = ViewBag.Category }, FormMethod.Get))
+                            {
+                                <div class="input-append">
+                                    <input type="text" id="word" name="word" class="span12 search-query">
+                                    <button type="submit" class="btn">Search</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div id="shopping-cart" class="col-md-4">
+                        @{ Html.RenderAction("Index", "Cart"); }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row offset-top-20">
+            <div class="col-lg-4 col-sm-6">
+                <div class="well text-center">
+                    <a href="http://www.tokiota.com">MOVIES</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="well text-center">
+                    <a href="http://www.tokiota.com">OFFER HERE</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="well text-center">
+                    <a href="http://www.tokiota.com">OFFER HERE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

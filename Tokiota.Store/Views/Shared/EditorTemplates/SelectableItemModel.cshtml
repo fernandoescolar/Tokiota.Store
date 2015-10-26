@@ -1,0 +1,13 @@
+﻿@model Tokiota.Store.Models.SelectableItemModel
+@if (Model != null)
+{
+    @Html.HiddenFor(m => m.Name)
+    <text>
+        <div class="row">
+            @Html.CheckBoxFor(m => m.IsSelected)
+            @Html.Label(Model.Name, new {@class = "col-md-2 control-label"})
+        </div>
+    </text>
+    
+}
+

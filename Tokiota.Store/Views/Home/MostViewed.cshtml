@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Tokiota.Store.Domain.Catalog.Model.TopListItem>
+
+<div class="col-md-3">
+    <h4 class="line3 center standart-h4title"><span>Most Viewvisiteded</span></h4>
+    <ul class="footer-links">
+        @foreach (var item in Model)
+        {
+            <li><a href="@Url.Action("Details", "Product", new { id = item.Id })">@item.Name</a></li>
+        }
+    </ul>
+</div>
+

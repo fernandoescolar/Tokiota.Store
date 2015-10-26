@@ -1,0 +1,9 @@
+﻿@model Tokiota.Store.Models.SelectableItemModel
+@if (Model != null && Model.IsSelected)
+{
+    <text>
+        <div>@Html.Label(Model.Name, new {@class = "col-md-2 control-label"})</div>
+    </text>
+    
+}
+

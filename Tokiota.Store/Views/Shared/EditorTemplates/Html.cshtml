@@ -1,0 +1,24 @@
+﻿@model string
+@{ 
+    var id = Html.IdFor(m => m);
+}
+<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor_@id">
+    <div class="btn-group">
+        <a title="" class="btn" data-original-title="Bold (Ctrl/Cmd+B)" data-edit="bold"><i class="glyphicon glyphicon-bold"></i></a>
+        <a title="" class="btn" data-original-title="Italic (Ctrl/Cmd+I)" data-edit="italic"><i class="glyphicon glyphicon-italic"></i></a>
+    </div>
+    <div class="btn-group">
+        <a title="" class="btn" data-original-title="Bullet list" data-edit="insertunorderedlist"><i class="glyphicon glyphicon-list"></i></a>
+        <a title="" class="btn" data-original-title="Number list" data-edit="insertorderedlist"><i class="glyphicon glyphicon-th-list"></i></a>
+        <a title="" class="btn" data-original-title="Reduce indent (Shift+Tab)" data-edit="outdent"><i class="glyphicon glyphicon-indent-left"></i></a>
+        <a title="" class="btn" data-original-title="Indent (Tab)" data-edit="indent"><i class="glyphicon glyphicon-indent-right"></i></a>
+    </div>
+    <div class="btn-group">
+        <a title="" class="btn" data-original-title="Undo (Ctrl/Cmd+Z)" data-edit="undo"><i class="glyphicon glyphicon-backward"></i></a>
+        <a title="" class="btn" data-original-title="Redo (Ctrl/Cmd+Y)" data-edit="redo"><i class="glyphicon glyphicon-forward"></i></a>
+    </div>
+</div>
+<div id="editor_@id" contenteditable="true" class="html-editor" data-hidden="@id">
+    @Html.Raw(Model)
+</div>
+@Html.HiddenFor(m => m)
