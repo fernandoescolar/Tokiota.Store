@@ -3,6 +3,7 @@
     using Model;
     using System;
     using System.Data.Entity;
+    using Services;
 
     internal class CatalogDbInitializer : DropCreateDatabaseIfModelChanges<CatalogDbContext> //DropCreateDatabaseAlways<CatalogDbContext>
     {
@@ -10,7 +11,7 @@
         {
             CreateProduct(context, "Gravity", "Bullock interpreta a la doctora Ryan Stone, una brillante ingeniera especializada en medicina en su primera misión en un transbordador, con el veterano astronauta Matt Kowalsky (Clooney). Pero en un paseo espacial aparentemente de rutina se desencadena el desastre. El transbordador queda destruido, dejando a Stone y Kowalsky completamente solos, unidos el uno al otro y dando vueltas en la oscuridad.", Category.ScyFy, 27.42m, "/images/gravity.jpg");
             CreateProduct(context, "World War Z", "Cuando el mundo comienza a ser invadido por una pandemia de muertos vivientes, el experto investigador de las Naciones Unidas Gerry Lane (Brad Pitt) intentará evitar lo que podría ser el fin de la civilización en una carrera contra el tiempo y el destino. La destrucción a la que se ve sometida la raza humana le hace recorrer el mundo entero buscando respuestas sobre cómo parar la horrible epidemia que amenaza a toda la humanidad, intentando salvar las vidas de millones de desconocidos así como la de su propia familia.", Category.Terror, 28.18m, "/images/WorldWarZ.jpg");
-            CreateProduct(context, "Avatar", "En la aventura épica AVATAR, James Cameron, el director de 'Titanic', nos lleva a un espectacular nuevo mundo más allá de nuestra imaginación. En una lejana luna llamada Pandora, un héroe inesperado se embarca en un viaje de autosalvación y descubrimiento mientras lidera una heroica batalla para salvar una civilización. La película fue ideada por Cameron hace 14 años, cuando los medios técnicos, no permitían hacer realidad su visión. Ahora, después de 4 años de producción, AVATAR nos sumerge en una experiencia cinematográfica completamente nueva, donde la revolucionaria tecnología inventada para la película, pasa desapercibida ante la contundencia de los personajes y la conmovedora historia.", Category.Adventure, 18.15m, "/images/gravity.jpg");
+            CreateProduct(context, "Avatar", "En la aventura épica AVATAR, James Cameron, el director de 'Titanic', nos lleva a un espectacular nuevo mundo más allá de nuestra imaginación. En una lejana luna llamada Pandora, un héroe inesperado se embarca en un viaje de autosalvación y descubrimiento mientras lidera una heroica batalla para salvar una civilización. La película fue ideada por Cameron hace 14 años, cuando los medios técnicos, no permitían hacer realidad su visión. Ahora, después de 4 años de producción, AVATAR nos sumerge en una experiencia cinematográfica completamente nueva, donde la revolucionaria tecnología inventada para la película, pasa desapercibida ante la contundencia de los personajes y la conmovedora historia.", Category.Adventure, 18.15m, "/images/avatar.jpg");
             CreateProduct(context, "Intouchables", "Tras un accidente de parapente, Philippe, un rico aristócrata, contrata a Driss como asistente y cuidador, un joven procedente de un barrio de viviendas públicas que ha salido recientemente de prisión —en otras palabras, la persona menos indicada para el trabajo—. Juntos van a mezclar a Vivaldi y “Earth, Wind & Fire”, la dicción elegante y la jerga callejera, los trajes y los pantalones de chándal. Dos mundos van a chocar y van a tener que entenderse mutuamente para dar lugar a una amistad tan demencial, cómica y sólida como inesperada, una relación singular que genera energía y los hace… ¡intocables!", Category.Comedy, 15.41m, "/images/Intouchables.jpg");
             CreateProduct(context, "El Hobbit", "\"El Hobbit: La Desolación de Smaug\" continua la aventura de Bilbo Bolsón en su viaje con el mago Gandalf y trece enanos liderados por Thorin Escudo de Roble en una búsqueda épica para reclamar el reino enano de Erebor. En su camino toparán con multitud de peligros y harán frente al temible dragón Smaug.", Category.Adventure, 26.18m, "/images/hobbit.jpg");
             CreateProduct(context, "Frozen", "Anna, una optimista y valiente chica, se embarca en un viaje épico en el que hará equipo con Kristoff, un audaz hombre de montaña, y su fiel reno Sven, para encontrar a su hermana Elsa, cuyos poderes de hielo han atrapado al reino de Arendelle en un invierno eterno. Se encontrarán con situaciones extremas, duendes místicos y un muñeco de nieve muy divertido llamado Olaf. Juntos lucharán contra los elementos para salvar el reino.", Category.Comedy, 26.83m, "/images/frozen.jpg");
@@ -26,15 +27,23 @@
 
         private static void CreateProduct(CatalogDbContext context, string name, string description, Category category, decimal price, string image)
         {
+            var service = new ImageStorageService();
+            var file = System.Web.HttpContext.Current.Server.MapPath(image);
+            string imageUrl;
+            using (var reader = System.IO.File.OpenRead(file))
+            {
+                imageUrl = service.SaveImage(file, reader);
+            }
+
             var p = new Product
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = name,
-                        Description = description,
-                        Category = category,
-                        Price = price,
-                        Image = image
-                    };
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = name,
+                Description = description,
+                Category = category,
+                Price = price,
+                Image = imageUrl
+            };
             context.Products.Add(p);
         }
     }

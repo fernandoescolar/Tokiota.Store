@@ -1,4 +1,5 @@
-﻿@model Tokiota.Store.Models.Account.LoginModel
+﻿@using Tokiota.Store.Models.Account
+@model LoginModel
 
 @{
     ViewBag.Title = "Log in";
@@ -45,6 +46,11 @@
                     @Html.ActionLink("Recover your password", "PasswordRecovery") if you forgot it.
                 </p>
             }
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>
 </div>

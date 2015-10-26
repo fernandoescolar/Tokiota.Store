@@ -1,37 +1,45 @@
 ﻿namespace Tokiota.Store.Domain.Catalog.Services
 {
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Blob;
+    using System.Configuration;
     using System.IO;
-    using System.Web;
 
     internal class ImageStorageService : IImageStorageService
     {
+        private const string AzureStorageConnectionStringKey = "StorageConnectionString";
+        private readonly CloudStorageAccount storageAccount;
+
+        public ImageStorageService()
+        {
+            this.storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings[AzureStorageConnectionStringKey].ConnectionString);
+        }
+
         public string SaveImage(string fileName, Stream stream)
         {
-            var imageUrl = Path.Combine("~/images", Path.GetFileName(fileName));
-            var destination = HttpContext.Current.Server.MapPath(imageUrl);
+            var blobName = Path.GetFileName(fileName);
+            var container = this.GetOrCreateContainer();
+            var blockBlob = container.GetBlockBlobReference(blobName);
+            blockBlob.UploadFromStream(stream);
 
-            if (File.Exists(destination)) File.Delete(destination);
-
-            using (var reader = new BinaryReader(stream))
-            {
-                using (var writer = new BinaryWriter(new FileStream(destination, FileMode.CreateNew)))
-                {
-                    var buffer = new byte[1024 * 4];
-                    var read = 0;
-                    while ((read = reader.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        writer.Write(buffer, 0, read);
-                    }
-                }
-            }
-
-            return imageUrl;
+            return blockBlob.Uri.ToString();
         }
 
         public void DeleteImage(string imageUrl)
         {
-            var destination = HttpContext.Current.Server.MapPath(imageUrl);
-            if (File.Exists(destination)) File.Delete(destination);
+            var blobName = Path.GetFileName(imageUrl);
+            var container = this.GetOrCreateContainer();
+            var blockBlob = container.GetBlockBlobReference(blobName);
+            blockBlob.Delete();
+        }
+
+        private CloudBlobContainer GetOrCreateContainer()
+        {
+            var blobClient = storageAccount.CreateCloudBlobClient();
+            var container = blobClient.GetContainerReference("images");
+            container.CreateIfNotExists();
+            container.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
+            return container;
         }
     }
 }

@@ -55,8 +55,8 @@
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            //    clientId: "63d1bb01-a0da-4729-8bd3-5e70c5311606",
+            //    clientSecret: "NUFF6wsLphFV66CYj1x1PZzf7h/w8I74sl9x4rzaPVE=");
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",

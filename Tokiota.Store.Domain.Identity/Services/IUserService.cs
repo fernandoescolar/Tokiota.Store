@@ -11,6 +11,7 @@
         Task<ClaimsIdentity> CreateIdentityAsync(ApplicationUser user, string authenticationType);
         Task<ApplicationUser> FindAsync(string userName, string password);
         Task<IdentityResult> AddPasswordAsync(string userId, string password);
+        Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login);
         Task<IdentityResult> ChangePasswordAsync(string userId, string currentPassword, string newPassword);
         Task<IdentityResult> RemoveLoginAsync(string userId, UserLoginInfo login);
         Task<IList<UserLoginInfo>> GetLoginsAsync(string userId);
@@ -19,7 +20,9 @@
         Task<IList<string>> GetRolesAsync(string userId);
         IEnumerable<string> GetAllRoleNames();
         IEnumerable<ApplicationUser> GetAllUsers(int pageSize, int page, out int total);
+        Task<IdentityResult> CreateAsync(ApplicationUser user);
         Task<IdentityResult> CreateAsync(ApplicationUser user, string password, string[] roles);
         Task<IdentityResult> UpdateAsync(ApplicationUser user, string[] roles);
+        Task<IList<string>> GetValidTwoFactorProvidersAsync(string userId);
     }
 }
